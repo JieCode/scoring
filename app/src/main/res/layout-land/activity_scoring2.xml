@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/color_90_red" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/color_90_blue" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_26"
+        android:layout_above="@+id/ll_win_count"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_red_score"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="00"
+            android:textColor="@color/white"
+            android:textSize="200sp" />
+
+        <TextView
+            android:id="@+id/tv_blue_score"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="00"
+            android:textColor="@color/white"
+            android:textSize="200sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_win_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:layout_above="@+id/ll_menu"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_red_score_count"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:text="连胜1次"
+            android:visibility="invisible"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_20" />
+
+        <TextView
+            android:id="@+id/tv_blue_score_count"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:text="连胜1次"
+            android:visibility="invisible"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_20" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_menu"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_alignParentBottom="true"
+        android:gravity="right|center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_15">
+
+        <ImageView
+            android:id="@+id/iv_group"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginStart="@dimen/dp_15"
+            android:src="@mipmap/icon_group"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/iv_redo"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginStart="@dimen/dp_15"
+            android:src="@mipmap/icon_redo" />
+
+        <ImageView
+            android:id="@+id/iv_reset"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginStart="@dimen/dp_15"
+            android:padding="@dimen/dp_2"
+            android:src="@mipmap/icon_reset" />
+    </LinearLayout>
+
+</RelativeLayout>

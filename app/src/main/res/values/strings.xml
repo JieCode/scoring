@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">scoring</string>
+    <string name="reset_tip">是否重开一局？</string>
+    <string name="win_tip_red">恭喜红方胜利！！！</string>
+    <string name="win_tip_blue">恭喜蓝方胜利！！！</string>
+    <string name="cancel">取消</string>
+    <string name="submit">确定</string>
+    <string name="celebrate">恭喜恭喜恭喜！</string>
+</resources>
