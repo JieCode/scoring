@@ -63,6 +63,11 @@ class Scoring2Activity : AppCompatActivity() {
         binding.ivReset.setOnClickListener {
             showResetDialog()
         }
+        binding.ivGroup.setOnClickListener{
+            if (AvoidDoubleClick.responseDoubleClick(AvoidDoubleClick.KEY_CLICK_GROUP)) {
+                GroupingActivity.startActivity(this)
+            }
+        }
     }
 
     private var handler = object : Handler(Looper.getMainLooper()) {

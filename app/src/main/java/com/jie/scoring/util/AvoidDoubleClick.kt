@@ -7,6 +7,7 @@ package com.jie.scoring.util
  */
 class AvoidDoubleClick {
     companion object{
+        const val KEY_CLICK_GROUP: String = "key_click_group"
         const val KEY_CLICK_REDO = "key_click_redo"
 
         private var map:Map<String ,Long> = mapOf()
