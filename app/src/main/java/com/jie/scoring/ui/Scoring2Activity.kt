@@ -12,6 +12,8 @@ import com.jie.scoring.databinding.ActivityScoring2Binding
 import com.jie.scoring.listener.OnDoubleClickListener
 import com.jie.scoring.ui.dialog.ResetDialog
 import com.jie.scoring.ui.dialog.WinDialog
+import com.jie.scoring.ui.group.Grouping2Activity
+import com.jie.scoring.ui.group.GroupingActivity
 import com.jie.scoring.util.AvoidDoubleClick
 
 class Scoring2Activity : AppCompatActivity() {
@@ -65,7 +67,7 @@ class Scoring2Activity : AppCompatActivity() {
         }
         binding.ivGroup.setOnClickListener{
             if (AvoidDoubleClick.responseDoubleClick(AvoidDoubleClick.KEY_CLICK_GROUP)) {
-                GroupingActivity.startActivity(this)
+                Grouping2Activity.startActivity(this)
             }
         }
     }

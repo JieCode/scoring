@@ -1,9 +1,8 @@
-package com.jie.scoring.ui
+package com.jie.scoring.ui.group
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.NumberPicker
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jie.scoring.base.BaseActivity
 import com.jie.scoring.databinding.ActivityGroupingBinding

@@ -30,7 +30,7 @@ class ResetDialog {
         }
     }
 
-    interface OnResetListener{
+    interface OnResetListener {
         fun onReset()
     }
 }

@@ -1,4 +1,4 @@
-package com.jie.scoring.ui
+package com.jie.scoring.ui.group
 
 import android.content.Context
 import android.view.LayoutInflater
