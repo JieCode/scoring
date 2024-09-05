@@ -57,7 +57,7 @@ class Grouping2Activity : BaseActivity() {
             override fun onChoose(position: Int, member: Member) {
             }
 
-            override fun deleteMember(position: Int, member: Member) {
+            override fun onItemLongClick(position: Int, member: Member) {
             }
 
         })

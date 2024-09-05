@@ -2,9 +2,6 @@ package com.jie.scoring.ui.group
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.text.LineBreaker
-import android.os.Build
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,28 +31,41 @@ class MemberAdapter(
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val member = mList[position]
         holder.binding.tvName.text = member.username
-        if (member.gender == "F") {
-            if (mSelectedList.contains(member)) {
-                holder.binding.tvName.setBackgroundResource(R.drawable.shape_radius_red90)
+        var isSelected = mSelectedList.contains(member)
+        for (selectMember in mSelectedList) {
+            if (member.id == selectMember.id) {
+                holder.binding.tvName.setBackgroundResource(
+                    if (member.gender == "F")
+                        R.drawable.shape_radius_red90
+                    else
+                        R.drawable.shape_radius_blue90
+                )
                 holder.binding.tvName.setTextColor(mContext.getColor(R.color.white))
-            } else {
-                holder.binding.tvName.setBackgroundResource(R.drawable.shape_radius_red90_stroke)
-                holder.binding.tvName.setTextColor(mContext.getColor(R.color.color_90_red))
+                isSelected = true
+                break
             }
-        } else if (member.gender == "M") {
-            if (mSelectedList.contains(member)) {
-                holder.binding.tvName.setBackgroundResource(R.drawable.shape_radius_blue90)
-                holder.binding.tvName.setTextColor(mContext.getColor(R.color.white))
-            } else {
-                holder.binding.tvName.setBackgroundResource(R.drawable.shape_radius_blue90_stroke)
-                holder.binding.tvName.setTextColor(mContext.getColor(R.color.color_90_blue))
-            }
+        }
+        if (!isSelected) {
+            holder.binding.tvName.setBackgroundResource(
+                if (member.gender == "F")
+                    R.drawable.shape_radius_red90_stroke
+                else
+                    R.drawable.shape_radius_blue90_stroke
+            )
+            holder.binding.tvName.setTextColor(
+                mContext.getColor(
+                    if (member.gender == "F")
+                        R.color.color_90_red
+                    else
+                        R.color.color_90_blue
+                )
+            )
         }
         holder.itemView.setOnClickListener {
             onItemClickListener.onChoose(position, member)
         }
         holder.itemView.setOnLongClickListener {
-            onItemClickListener.deleteMember(position, member)
+            onItemClickListener.onItemLongClick(position, member)
             true
         }
     }
@@ -70,6 +80,6 @@ class MemberAdapter(
 
     interface OnItemClickListener {
         fun onChoose(position: Int, member: Member)
-        fun deleteMember(position: Int, member: Member)
+        fun onItemLongClick(position: Int, member: Member)
     }
 }

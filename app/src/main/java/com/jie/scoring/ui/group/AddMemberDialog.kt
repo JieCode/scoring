@@ -42,6 +42,39 @@ class AddMemberDialog {
                 dialog.dismiss()
             }
         }
+
+        fun showDialog(mContext: Context, member: Member, onAddMemberListener: OnAddMemberListener) {
+            var view = LayoutInflater.from(mContext).inflate(R.layout.dialog_add_member, null)
+            var dialog = Dialog(mContext, R.style.dialog)
+            var binding = DialogAddMemberBinding.bind(view)
+            // 设置 Dialog 的宽度
+            dialog.window?.setLayout(
+                Resources.getSystem().displayMetrics.widthPixels / 2, // 调整宽度为屏幕的一半
+                WindowManager.LayoutParams.WRAP_CONTENT
+            )
+            dialog.setContentView(view)
+            dialog.show()
+            binding.etName.setText(member.username)
+            if (member.gender == "F") {
+                binding.rbFemale.isChecked = true
+            } else {
+                binding.rbMale.isChecked = true
+            }
+            binding.tvAdd.text = "修改"
+            binding.tvAdd.setOnClickListener {
+                dialog.dismiss()
+                member.username = binding.etName.text.toString()
+                if (binding.rgSex.checkedRadioButtonId == R.id.rb_female) {
+                    member.gender = "F"
+                } else {
+                    member.gender = "M"
+                }
+                onAddMemberListener.onAddMember(member)
+            }
+            binding.ivBack.setOnClickListener {
+                dialog.dismiss()
+            }
+        }
     }
 
     interface OnAddMemberListener {

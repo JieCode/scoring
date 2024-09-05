@@ -17,6 +17,20 @@ class MemberViewModel(private val memberDao: MemberDao) : ViewModel() {
         }
     }
 
+    fun updateMember(member: Member, updateMemberListener: UpdateMemberListener) {
+        viewModelScope.launch {
+            memberDao.update(member)
+            updateMemberListener.onUpdateMember(member)
+        }
+    }
+    fun insertMember(member: Member,insertMemberListener: InsertMemberListener) {
+        viewModelScope.launch {
+            val id = memberDao.insert(member)
+            member.id = id.toInt()
+            insertMemberListener.onMemberInsert(member)
+        }
+    }
+
     fun getAllMembers(): MutableList<Member> {
         return memberDao.getAllMembers()
     }
@@ -27,8 +41,22 @@ class MemberViewModel(private val memberDao: MemberDao) : ViewModel() {
         }
     }
 
+    fun deleteMemberById(id: Int) {
+        viewModelScope.launch {
+            memberDao.deleteMemberById(id)
+        }
+    }
+
     interface GetAllMemberListener {
         fun onGetAllMember(memberList: MutableList<Member>)
+    }
+
+    interface InsertMemberListener {
+        fun onMemberInsert(member: Member)
+    }
+
+    interface UpdateMemberListener {
+        fun onUpdateMember(member: Member)
     }
 }
 /**

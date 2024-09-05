@@ -15,7 +15,7 @@ import androidx.room.Update
 @Dao
 interface MemberDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(member: Member)
+    suspend fun insert(member: Member):Long
 
     @Update
     suspend fun update(member: Member)

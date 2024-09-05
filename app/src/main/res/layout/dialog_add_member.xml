@@ -87,6 +87,7 @@
         android:layout_marginEnd="@dimen/dp_50"
         android:background="@drawable/shape_radius_blue90"
         android:gravity="center"
+        android:letterSpacing="2"
         android:text="添加"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_16" />

@@ -17,7 +17,7 @@ import kotlinx.coroutines.withContext
 /**
  * @CreateDate: 2024/9/3
  * @author: jingjie
- * @desc:
+ * @desc: 选择成员对话框，可以选择、添加、修改、删除成员
  */
 class ChooseMemberDialog {
     companion object {
@@ -46,22 +46,48 @@ class ChooseMemberDialog {
                 binding.tvEmpty.visibility = if (memberList.isEmpty()) View.VISIBLE else View.GONE
                 binding.rvMember.adapter = MemberAdapter(mContext, memberList, mSelectedList, object : MemberAdapter.OnItemClickListener {
                     override fun onChoose(position: Int, member: Member) {
-                        if (mSelectedList.contains(member)) {
-                            mSelectedList.remove(member)
-                        } else {
+                        var isSelected = mSelectedList.contains(member)
+                        for (selectMember in mSelectedList) {
+                            if (member.id == selectMember.id) {
+                                mSelectedList.remove(member)
+                                isSelected = true
+                                break
+                            }
+                        }
+                        if (!isSelected) {
                             mSelectedList.add(member)
                         }
                         binding.rvMember.adapter?.notifyItemChanged(position)
                     }
 
-                    override fun deleteMember(position: Int, member: Member) {
-                        DeleteMemberDialog.createDialog(mContext, member, object : DeleteMemberDialog.OnDeleteMemberListener {
-                            override fun onMemberDelete() {
-                                viewModel.deleteMember(member)
-                                memberList.remove(member)
-                                binding.tvEmpty.visibility = if (memberList.isEmpty()) View.VISIBLE else View.GONE
-                                binding.rvMember.adapter?.notifyItemRemoved(position)
+                    override fun onItemLongClick(position: Int, member: Member) {
+                        MemberMenuDialog.createDialog(mContext, member, object : MemberMenuDialog.OnMemberMenuClickListener {
+                            override fun onModifyClick(member: Member) {
+                                AddMemberDialog.showDialog(mContext, member, object : AddMemberDialog.OnAddMemberListener {
+                                    override fun onAddMember(member: Member) {
+                                        viewModel.updateMember(member, object : MemberViewModel.UpdateMemberListener {
+                                            override fun onUpdateMember(member: Member) {
+                                                memberList[position].gender = member.gender
+                                                memberList[position].username = member.username
+                                                binding.tvEmpty.visibility = if (memberList.isEmpty()) View.VISIBLE else View.GONE
+                                                binding.rvMember.adapter?.notifyItemChanged(position)
+                                            }
+                                        })
+                                    }
+                                })
                             }
+
+                            override fun onDeleteClick(member: Member) {
+                                DeleteMemberDialog.createDialog(mContext, member, object : DeleteMemberDialog.OnDeleteMemberListener {
+                                    override fun onMemberDelete() {
+                                        viewModel.deleteMember(member)
+                                        memberList.remove(member)
+                                        binding.tvEmpty.visibility = if (memberList.isEmpty()) View.VISIBLE else View.GONE
+                                        binding.rvMember.adapter?.notifyItemRemoved(position)
+                                    }
+                                }).show()
+                            }
+
                         }).show()
                     }
 
@@ -74,10 +100,13 @@ class ChooseMemberDialog {
                 binding.tvAdd.setOnClickListener {
                     AddMemberDialog.showDialog(mContext, object : AddMemberDialog.OnAddMemberListener {
                         override fun onAddMember(member: Member) {
-                            viewModel.insertMember(member)
-                            memberList.add(member)
-                            binding.tvEmpty.visibility = if (memberList.isEmpty()) View.VISIBLE else View.GONE
-                            binding.rvMember.adapter?.notifyItemInserted(memberList.size - 1)
+                            viewModel.insertMember(member, object : MemberViewModel.InsertMemberListener {
+                                override fun onMemberInsert(member: Member) {
+                                    memberList.add(member)
+                                    binding.tvEmpty.visibility = if (memberList.isEmpty()) View.VISIBLE else View.GONE
+                                    binding.rvMember.adapter?.notifyItemInserted(memberList.size - 1)
+                                }
+                            })
                         }
                     })
                 }
