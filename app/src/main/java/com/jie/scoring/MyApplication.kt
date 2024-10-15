@@ -14,7 +14,7 @@ class MyApplication : Application() {
     val memberDatabase: MemberRoomDatabase by lazy { MemberRoomDatabase.getDatabase(this) }
 
     companion object {
-        var selectedMembers: MutableList<Member> = mutableListOf()
-        var groupList: MutableList<Group2Adapter.GroupItem> = mutableListOf()
+        var selectedMemberList: ArrayList<Member> = ArrayList<Member>()
+        var groupList: ArrayList<Group2Adapter.GroupItem> = ArrayList<Group2Adapter.GroupItem>()
     }
 }

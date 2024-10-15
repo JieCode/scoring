@@ -47,6 +47,24 @@ class Group2Adapter(var context: Context, var lstMember: List<GroupItem>) : Recy
                     context.getColor(R.color.color_90_blue)
                 }
             )
+
+            holder.binding.tvMember3.text = item.member3.username
+            holder.binding.tvMember3.setTextColor(
+                if (TextUtils.equals(item.member3.gender, "F")) {
+                    context.getColor(R.color.color_90_red)
+                } else {
+                    context.getColor(R.color.color_90_blue)
+                }
+            )
+
+            holder.binding.tvMember4.text = item.member4.username
+            holder.binding.tvMember4.setTextColor(
+                if (TextUtils.equals(item.member4.gender, "F")) {
+                    context.getColor(R.color.color_90_red)
+                } else {
+                    context.getColor(R.color.color_90_blue)
+                }
+            )
         }
     }
 
@@ -61,5 +79,7 @@ class Group2Adapter(var context: Context, var lstMember: List<GroupItem>) : Recy
     class GroupItem {
         lateinit var member1: Member
         lateinit var member2: Member
+        lateinit var member3: Member
+        lateinit var member4: Member
     }
 }

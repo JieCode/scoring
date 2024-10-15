@@ -15,10 +15,10 @@
         android:layout_marginBottom="@dimen/dp_5"
         android:gravity="center"
         android:background="@drawable/shape_radius_blue90_stroke"
-        android:paddingStart="@dimen/dp_15"
-        android:paddingTop="@dimen/dp_8"
-        android:paddingEnd="@dimen/dp_15"
-        android:paddingBottom="@dimen/dp_8"
+        android:paddingStart="@dimen/dp_8"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingEnd="@dimen/dp_8"
+        android:paddingBottom="@dimen/dp_5"
         android:text="蒋敦豪"
         android:textColor="@color/color_90_blue" />
 
